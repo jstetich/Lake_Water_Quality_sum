@@ -1,12 +1,12 @@
 ---
-title: "Compare Versions of Sebago Lake Data"
+title: "Analysis of Sebago Lake Data"
 author:  "Curtis C. Bohlen, Casco Bay Estuary Partnership"
-date: "11/29/2020"
+date: "11/06/2021"
 output:
   github_document:
     toc: true
-    fig_width: 7
-    fig_height: 5
+    fig_width: 5
+    fig_height: 4
 ---
 
 <img
@@ -14,15 +14,23 @@ output:
   style="position:absolute;top:10px;right:50px;" />
 
 
+```{r setup, , include=FALSE}
+knitr::opts_chunk$set(fig.align = 'center',
+                      fig.width = 5, fig.height = 4,
+                      collapse = TRUE, comment = "#>")
+```
+
+
 # Introduction
 Sebago lake is our region's largest lake, and one of the most important.  it is 
 a crucial recreational resource for the region, and also provides high qUality
-drinking water for tens of thousands.
+drinking water for tens of thousands. Not coincidentally, Sebago Lake also has 
+one of the longest and richest records of water quality monitoring of any 
+lake in the region. Here we leverage that rich data to look a bit more closely 
+at how water clarity varies in space and time within one lake basin.
 
-Not coincidentally, Sebago Lake also has one of the longest and riches records of water quality monitoting of any lake in the region.
-
-Here we leverage that rich data to look a bit more closely at how
-water clarity varies in space and time.
+Ultimately, this data was not incoroporated into State of Casco Bay in any 
+significant way.
 
 # Load Libraries
 ```{r}
@@ -40,7 +48,7 @@ theme_set(theme_cbep())
 # Load Data
 ## Folder References
 ```{r}
-sisterfldnm <- 'Derived_Data'
+sisterfldnm <- 'Data'
 parent <- dirname(getwd())
 sister <- file.path(parent,sisterfldnm)
 ```
@@ -52,6 +60,7 @@ Secchi <- read_csv(file.path(sister, fn)) %>%
   filter(MIDAS == 5786) %>%
   mutate(Year = as.numeric(format(Date, format = '%Y')))
 ```
+
 We remove two values from the Sebago Lake record.
 ```{r}
 Secchi <- Secchi %>%
@@ -128,7 +137,6 @@ plot(the_gam, shade = TRUE, pages = 1, scale = 0)
 Some of those extreme values make no sense in this context, so something's not
 working at the limits.
 
-
 # Reduced Data for Simplicity
 ```{r}
 reduced_data <- secchi_sebago_data %>%
@@ -152,8 +160,8 @@ or worse water clarity, especially around 1990 to 2002 or so.  Since 2006,
 clarity has gradually improved.  It is actually pretty remarkable that results
 are so consistent across the lake.
 
-the GGPLOT default smoothers missom of thies detail, because they oversmooth.
-```{r}
+The GGPLOT default smoothers miss some of this detail, because they oversmooth.
+```{r smoothed_three_regions}
 ggplot(reduced_data, aes(Year, Secchi_Depth)) +
   geom_point(aes(color = Region)) +
   geom_smooth( se = FALSE) +
@@ -166,7 +174,8 @@ ggplot(reduced_data, aes(Year, Secchi_Depth)) +
 Without going to the extreme of using geospatial methods, the easiest way to get
 a feel for variability associated with location is by looking at ANOVAs.
 ```{r}
-the_lm <- lm(Secchi_Depth ~ factor(Station) + factor(Year), data = secchi_sebago_data)
+the_lm <- lm(Secchi_Depth ~ factor(Station) + factor(Year), 
+             data = secchi_sebago_data)
 anova(the_lm)
 ```
 So, the mean square error of the residuals is small compared to station or Year
@@ -179,6 +188,7 @@ the_lm <- lm(Secchi_Depth ~ factor(Year) + factor(Station),
              data = secchi_sebago_data)
 anova(the_lm)
 ```
+
 ```{r}
 the_lm <- lm(Secchi_Depth ~ factor(Year) + Region + factor(Station),
              data = secchi_sebago_data)

@@ -42,28 +42,21 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 ``` r
 library(tidyverse)
-```
-
-    ## Warning: package 'tidyverse' was built under R version 4.0.5
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.3     v purrr   0.3.4
-    ## v tibble  3.1.2     v dplyr   1.0.6
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   1.4.0     v forcats 0.5.1
-
-    ## Warning: package 'tidyr' was built under R version 4.0.5
-
-    ## Warning: package 'dplyr' was built under R version 4.0.5
-
-    ## Warning: package 'forcats' was built under R version 4.0.5
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
+#> Warning: package 'tidyverse' was built under R version 4.0.5
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.4     v dplyr   1.0.7
+#> v tidyr   1.1.3     v stringr 1.4.0
+#> v readr   2.0.1     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'tibble' was built under R version 4.0.5
+#> Warning: package 'tidyr' was built under R version 4.0.5
+#> Warning: package 'readr' was built under R version 4.0.5
+#> Warning: package 'dplyr' was built under R version 4.0.5
+#> Warning: package 'forcats' was built under R version 4.0.5
+#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
 library(readxl)
 library(mblm)
 
@@ -82,7 +75,7 @@ NAs for the Secchi Depth.
 ## Folder References
 
 ``` r
-sibfldnm <- 'Derived_Data'
+sibfldnm <- 'Data'
 parent <- dirname(getwd())
 sibling <- file.path(parent,sibfldnm)
 
@@ -94,34 +87,16 @@ dir.create(file.path(getwd(), 'figures'), showWarnings = FALSE)
 ``` r
 fn <- 'Secchi.csv'
 secchi_data <- read_csv(file.path(sibling, fn))
+#> Rows: 18039 Columns: 12
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr  (6): Lake, Town, Time, Secchi_On_Bottom, Scope, Cloud_Cover
+#> dbl  (5): MIDAS, Station, Secchi_Depth, Wind_Level, Wind_Direction
+#> dttm (1): Date
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   MIDAS = col_double(),
-    ##   Lake = col_character(),
-    ##   Town = col_character(),
-    ##   Station = col_double(),
-    ##   Date = col_datetime(format = ""),
-    ##   Time = col_character(),
-    ##   Secchi_Depth = col_double(),
-    ##   Secchi_On_Bottom = col_character(),
-    ##   Scope = col_double(),
-    ##   Wind_Level = col_double(),
-    ##   Wind_Direction = col_double(),
-    ##   Cloud_Cover = col_character()
-    ## )
-
-    ## Warning: 9 parsing failures.
-    ##  row   col expected actual                                                                                                                              file
-    ## 1598 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1599 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1600 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1601 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1602 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## .... ..... ........ ...... .................................................................................................................................
-    ## See problems(...) for more details.
 
 Eight of nine parsing errors are for Scope == “N”, Songo pond, (MIDAS =
 3262), for every observation in 2011. We decided that “N” here probably
@@ -198,7 +173,7 @@ secchi_data %>%
   geom_jitter(height = 0, width = 0.1)
 ```
 
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 This points to several problems:  
 1. Sebago Lake has been one of the most consistently sampled lakes,
 under a long-running program managed by the Portland Water District. Yet
@@ -215,20 +190,16 @@ recent samples that are not reflective of whole-lake conditions.
 ``` r
 fn <- 'Secchi_Sebago.csv'
 secchi_sebago_data <- read_csv(file.path(sibling, fn))
+#> Rows: 1002 Columns: 8
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr  (3): Lake, Town, StationName
+#> dbl  (4): MIDAS, Year, Secchi_Depth, Station
+#> dttm (1): Date
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   MIDAS = col_double(),
-    ##   Lake = col_character(),
-    ##   Town = col_character(),
-    ##   StationName = col_character(),
-    ##   Date = col_datetime(format = ""),
-    ##   Year = col_double(),
-    ##   Secchi_Depth = col_double(),
-    ##   Station = col_double()
-    ## )
 
 ``` r
 secchi_data <- secchi_data %>%
@@ -260,26 +231,15 @@ least some Secchi data.
 ``` r
 fn <- 'Lake_Morphometry_Metric.csv'
 morpho.data <- read_csv(file.path(sibling, fn))
+#> Rows: 6044 Columns: 27
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr (12): Lake, Towns, Trop_Cat, Dam, Major_Drainage, Sub_Drainage, HUC10_Na...
+#> dbl (15): MIDAS, Flushes_p_yr, HUC10_Code, UTM_X, UTM_Y, Latitude, Longitude...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   .default = col_double(),
-    ##   Lake = col_character(),
-    ##   Towns = col_character(),
-    ##   Trop_Cat = col_character(),
-    ##   Dam = col_character(),
-    ##   Major_Drainage = col_character(),
-    ##   Sub_Drainage = col_character(),
-    ##   HUC10_Name = col_character(),
-    ##   USGS_Quad24 = col_character(),
-    ##   County = col_character(),
-    ##   WQ_Statement = col_character(),
-    ##   Invasives = col_character(),
-    ##   Fishery = col_character()
-    ## )
-    ## i Use `spec()` for the full column specifications.
 
 # Lakes With Sufficient Data
 
@@ -296,8 +256,8 @@ secchi_data %>%
   geom_raster() +
   theme_cbep(base_size = 12) +
   theme(axis.text.x = element_text(angle = 90, vjust = .5)) +
-  scale_fill_gradient(breaks = c(0, 1, 2, 3, 4, 5),
-                          labels = c(1, 2, 4, 4, 16, 32),
+  scale_fill_gradient(breaks = c(0, 1, 2, 3, 4, 5, 6),
+                          labels = c(1, 2, 4, 8, 16, 32, 64),
                           name = 'Samples',
                           high = "#132B43",
                           low = "#56B1F7") +
@@ -307,7 +267,7 @@ secchi_data %>%
   ggtitle('Secchi Depth Data')
 ```
 
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ``` r
 # ggsave('figures/current_secchi_data_availability.pdf', device = cairo_pdf,
@@ -354,20 +314,20 @@ The Thiel-Sen estimator (actually the modification of that estimator due
 to Siegel, according to the help files) is resistant to outliers and
 other violations of the assumption of normality. It is thus better
 suited to this (unsupervised) application. We calculated linear model
-slopes to show that the qualitative results of my analysis are largely
+slopes to show that the qualitative results of the analysis are largely
 insensitive to the details of the analysis used, but we will report
-resukts of the Theil-Sen analysis.
+results of the Theil-Sen analysis.
 
 Significance of the Thiel-Sel slopes is based either on the Wilcoxon
 Test used in the default `summary.mblm()` function, or on on Kendall’s
-Tau. Kendall’s Tau which is conceptually more closely related to the
-Thiel-Sen estimator. It effectively tests for a monotonic relationship
-(corelation between orderings) between two series.
+Tau. We emphasize Kendall’s Tau which is conceptually closely related to
+the Thiel-Sen estimator. It effectively tests for a monotonic
+relationship (correlation between orderings) between two series.
 
 Some comments: This analysis ignores seasonal patterns and many possible
 covariates and confounding variables. It also ignores the fact that we
 have right censored data, which is one more reason to prefer Kendall’s
-Tau to the linear model.
+Tau (whihch is moderately resistant) to the linear model (which is not).
 
 ## Select Lakes With Sufficient Data
 
@@ -454,8 +414,12 @@ st_results <- recent_data %>%
 
 We calculate lake by lake linear model slopes and Theil-Sen slopes and P
 Values. We could also run these models using the nested data frames
-approach used for looking at metals in out Toxics data, but this “for
-loop” approach works (although inefficiently).
+approach used in several other analyses used for SoCB (e.g., for looking
+at metals in CBEP Toxics data).
+
+We use this, significnatly slower, approach because we began with code
+used in preparing the 2010 State of the Bay report. This “for loop”
+approach works (although inefficiently).
 
 ``` r
 MIDASES    <- vector(mode = 'numeric', length = 0)
@@ -466,9 +430,11 @@ TSSlopes   <- vector(mode = "numeric", length = 0)
 TSPValues  <- vector(mode = "numeric", length = 0)
 TSKPValues <- vector(mode = "numeric", length = 0)
 
-# This code is inefficient, since it copies vectors repeatedly on copy.
-# but this code works no matter how many la
- for (MIDAS in TrendLakesMIDAS) {
+# This code is inefficient, since it copies vectors repeatedly with each
+# "append(), but it works and does not require us to know the number of 
+# lakes
+ 
+for (MIDAS in TrendLakesMIDAS) {
    #print(MIDAS)
 
    thisdata <- secchi_data[secchi_data$MIDAS == MIDAS,]
@@ -506,22 +472,20 @@ TSKPValues <- vector(mode = "numeric", length = 0)
      error = function(err) {cat('TSKPValues\n')
                               print(err)})
 }
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
 ```
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
 
 As planned, results line up, so we can bind columns together to create a
 final dataset.
 
 ``` r
 any( ! lt_results$MIDAS ==  MIDASES)
+#> [1] FALSE
 ```
-
-    ## [1] FALSE
 
 ``` r
 more <- tibble(Slope = Slopes,
@@ -538,7 +502,7 @@ rm(more, Slopes, PValues, TSSlopes, TSPValues, TSKPValues)
 
 We filter out near-zero slopes (&lt; 0.005m per year, or \~ 5 cm per
 decade) as meaningless. We would not normally do that, but the Thiel-Sen
-analysis produces couple of lakes with slopes exactly equal to zero,
+analysis produces a couple of lakes with slopes exactly equal to zero,
 which nevertheless have statistically significant trends by Kendall’s
 tau. This reflects the slightly different meanings of the different
 statistical tests involved.
@@ -611,31 +575,32 @@ might expect.
 
 ``` r
 cor(lt_results$Slope, lt_results$TSSlope)
+#> [1] 0.8580664
 ```
-
-    ## [1] 0.8580664
 
 ``` r
 plt <-  ggplot(lt_results, aes(Slope, TSSlope))  +
   geom_hline(yintercept = 0, lty = 3) +
   geom_vline(xintercept = 0, lty = 3) +
-  geom_abline(intercept = 0, slope = 1, lty = 3) +
+  geom_abline(intercept = 0, slope = 1, lty = 3, size = 1) +
   #geom_point(aes(color = Median), size = 5, alpha = 0.5) +
   geom_text(aes(label = MIDAS,  color = TS_category), size = 3) + 
 
-  geom_smooth(method = 'lm')
+  geom_smooth(method = 'lm') +
+  
+  coord_fixed() 
+
 plt
+#> `geom_smooth()` using formula 'y ~ x'
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
 So results are similar either way. The TS Slope tends to be slightly
 lower than the linear model slope, especially for higher values of the
 slope, but the regression is not significantly different from a 1:1
-line. The two lakes, `MIDAS == 3420` and `MIDAS = 3448` show
-statistically significant improving trends by linear model, but not by
-Theil-Sen estimators.
+line. Two lakes, `MIDAS == 3420` and `MIDAS = 3448` show statistically
+significant improving trends by linear model, but not by Theil-Sen
+estimators.
 
 ### Short-term
 
@@ -689,132 +654,87 @@ TSKPValues <- vector(mode = "numeric", length = 0)
      error = function(err) {cat('TSKPValues\n')
                               print(err)})
 }
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
+#> Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
+#> ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
+#> Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
+#> zeroes
 ```
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
-
-    ## Warning in wilcox.test.default(z$intercepts): cannot compute exact p-value with
-    ## ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with ties
-
-    ## Warning in wilcox.test.default(z$slopes): cannot compute exact p-value with
-    ## zeroes
 
 As planned, results should line up, so we can bind columns together to
 create a final dataset.
 
 ``` r
 any( ! st_results$MIDAS ==  MIDASES)
+#> [1] FALSE
 ```
-
-    ## [1] FALSE
 
 ``` r
 more <- tibble(Slope = Slopes,
@@ -849,13 +769,12 @@ st_results <- st_results %>%
 
 ### Comparison of Linear and Thiel-Sen Estimator Slopes
 
-There is only moderate correlation between the two slope estimators.
+There is again a close correlation between the two slope estimators.
 
 ``` r
 cor(st_results$Slope, st_results$TSSlope)
+#> [1] 0.9349034
 ```
-
-    ## [1] 0.9349034
 
 ``` r
 plt <-  ggplot(st_results, aes(Slope, TSSlope))  +
@@ -867,11 +786,10 @@ plt <-  ggplot(st_results, aes(Slope, TSSlope))  +
 
   geom_smooth(method = 'lm')
 plt
+#> `geom_smooth()` using formula 'y ~ x'
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-27-1.png" style="display: block; margin: auto;" />
 
 ``` r
 st_results %>%
@@ -1012,13 +930,12 @@ secchi_data %>%
   summarize(Lake = first(Lake),
             FirstYear = min(Year, na.rm = TRUE),
             Samples = sum(! is.na(Secchi_Depth)))
+#> # A tibble: 2 x 4
+#>   MIDAS Lake      FirstYear Samples
+#>   <dbl> <chr>         <dbl>   <int>
+#> 1  3228 Duck Pond      1988      11
+#> 2  3417 Bog Pond       2009       9
 ```
-
-    ## # A tibble: 2 x 4
-    ##   MIDAS Lake      FirstYear Samples
-    ##   <dbl> <chr>         <dbl>   <int>
-    ## 1  3228 Duck Pond      1988      11
-    ## 2  3417 Bog Pond       2009       9
 
 # A Side Question
 
@@ -1027,26 +944,25 @@ Are trends related to overall clarity?
 ``` r
 m <- lm( TSSlope ~ Median, data = lt_results)
 summary(m)
+#> 
+#> Call:
+#> lm(formula = TSSlope ~ Median, data = lt_results)
+#> 
+#> Residuals:
+#>       Min        1Q    Median        3Q       Max 
+#> -0.026428 -0.010649 -0.001484  0.008383  0.062982 
+#> 
+#> Coefficients:
+#>              Estimate Std. Error t value Pr(>|t|)   
+#> (Intercept)  0.033802   0.011635   2.905   0.0065 **
+#> Median      -0.004010   0.001847  -2.171   0.0372 * 
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 0.01738 on 33 degrees of freedom
+#> Multiple R-squared:  0.125,  Adjusted R-squared:  0.09846 
+#> F-statistic: 4.713 on 1 and 33 DF,  p-value: 0.03722
 ```
-
-    ## 
-    ## Call:
-    ## lm(formula = TSSlope ~ Median, data = lt_results)
-    ## 
-    ## Residuals:
-    ##       Min        1Q    Median        3Q       Max 
-    ## -0.026428 -0.010649 -0.001484  0.008383  0.062982 
-    ## 
-    ## Coefficients:
-    ##              Estimate Std. Error t value Pr(>|t|)   
-    ## (Intercept)  0.033802   0.011635   2.905   0.0065 **
-    ## Median      -0.004010   0.001847  -2.171   0.0372 * 
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.01738 on 33 degrees of freedom
-    ## Multiple R-squared:  0.125,  Adjusted R-squared:  0.09846 
-    ## F-statistic: 4.713 on 1 and 33 DF,  p-value: 0.03722
 
 So, the slopes tend to be SLIGHTLY lower for lakes with higher Median
 Secchi depth….
@@ -1055,11 +971,10 @@ Secchi depth….
 ggplot(lt_results, aes(Median, TSSlope)) +
   geom_smooth(method = 'lm') +
   geom_point(aes(color = TS_category))
+#> `geom_smooth()` using formula 'y ~ x'
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-34-1.png" style="display: block; margin: auto;" />
 
 So if there is a relationship, it’s weak and predominately due to two
 lakes, so we won’t take it too seriously.
@@ -1081,15 +996,13 @@ filter(MIDAS %in% RecentLakesMIDAS) %>%
   theme_cbep(base_size = 12) +
   theme(panel.grid.major.y = element_line('gray')) +
   scale_x_continuous(limits = c(1970, 2022))
+#> `geom_smooth()` using formula 'y ~ x'
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-![](Secchi_Trend_Analysis_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+<img src="Secchi_Trend_Analysis_files/figure-gfm/trendlines_all_lakes-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ggsave('figures/secchi_trends.pdf', device = cairo_pdf,
        width = 5, height = 6)
+#> `geom_smooth()` using formula 'y ~ x'
 ```
-
-    ## `geom_smooth()` using formula 'y ~ x'

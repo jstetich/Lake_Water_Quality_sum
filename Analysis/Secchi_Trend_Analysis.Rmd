@@ -5,13 +5,21 @@ date: "11/19/2020"
 output:
   github_document:
     toc: true
-    fig_width: 7
-    fig_height: 5
+    fig_width: 5
+    fig_height: 4
 ---
 
 <img
   src="https://www.cascobayestuary.org/wp-content/uploads/2014/04/logo_sm.jpg"
   style="position:absolute;top:10px;right:50px;" />
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = 'center',
+                      fig.width = 5, fig.height = 4,
+                      collapse = TRUE, comment = "#>")
+```
+
 
 # Load Libraries
 ```{r}
@@ -31,7 +39,7 @@ included in these data but has no actual data -- only NAs for the Secchi Depth.
 
 ## Folder References
 ```{r}
-sibfldnm <- 'Derived_Data'
+sibfldnm <- 'Data'
 parent <- dirname(getwd())
 sibling <- file.path(parent,sibfldnm)
 
@@ -73,7 +81,6 @@ Here we convert some values to factors, and add Year and month terms.
    the Secchi Disk was on the bottom, "N" as evidence that it was not, and "" as 
    a missing value.
 ```{r}
-
 secchi_data <- secchi_data %>%
   rename(CensoredFlag = Secchi_On_Bottom) %>%
   mutate(CensoredFlag = fct_recode(CensoredFlag, 'Y'='B')) %>%
@@ -119,13 +126,12 @@ long-running program managed by the Portland Water District.  Yet  we have
 major gaps in the recent record.  This probably reflects changes in how data has
 been reported to DEP.  
 2.  The extreme low values in 2017 and 2018 correspond to the only two samples
-from a new station.  Any recent trend is due to addition of this anomolous new source
-of data.
+from a new station.  Any recent trend is due to addition of this anomolous new 
+source of data.
 
 We correct these problems in two steps.  First, we load in Portland Water
 District's extensive Sebago Lake archive of Secchi data, then delete two recent
 samples that are not reflective of whole-lake conditions.
-
 
 ```{r}
 fn <- 'Secchi_Sebago.csv'
@@ -154,7 +160,6 @@ recent_data <- secchi_data %>%
 ## Read Morphometric Data
 Read in morphometric data, and filter to lakes for which we have at least some
 Secchi data.
-
 ```{r}
 fn <- 'Lake_Morphometry_Metric.csv'
 morpho.data <- read_csv(file.path(sibling, fn))
@@ -173,8 +178,8 @@ secchi_data %>%
   geom_raster() +
   theme_cbep(base_size = 12) +
   theme(axis.text.x = element_text(angle = 90, vjust = .5)) +
-  scale_fill_gradient(breaks = c(0, 1, 2, 3, 4, 5),
-                          labels = c(1, 2, 4, 4, 16, 32),
+  scale_fill_gradient(breaks = c(0, 1, 2, 3, 4, 5, 6),
+                          labels = c(1, 2, 4, 8, 16, 32, 64),
                           name = 'Samples',
                           high = "#132B43",
                           low = "#56B1F7") +
@@ -216,7 +221,7 @@ preresults <- secchi_data %>%
 
 ## Trends
 The following is based on code originally used in preparing the 2015 State of
-the Bay Report. The use of a for loop makes this  rather inefficient.
+the Bay Report. The use of a for loop makes this rather inefficient.
 A more modern approach would use tidyverse approach using nested tibbles.
 
 In the following we calculate both Thiel-Sen and linear model slopes.
@@ -224,24 +229,26 @@ The Thiel-Sen estimator (actually the modification of that estimator due to
 Siegel, according to the help files) is resistant to outliers and other
 violations of the assumption of normality.  It is thus better suited to this
 (unsupervised) application.  We calculated linear model slopes to show that the
-qualitative results of my analysis are largely insensitive to the details of the
-analysis used, but we will report resukts of the Theil-Sen analysis.
+qualitative results of the analysis are largely insensitive to the details of
+the analysis used, but we will report results of the Theil-Sen analysis.
 
 Significance of the Thiel-Sel slopes is based either on the Wilcoxon Test used
-in the default `summary.mblm()` function, or on on Kendall's Tau.  Kendall's Tau
-which is conceptually more closely related to the Thiel-Sen estimator.
-It effectively tests for a monotonic relationship (corelation between orderings) between two series.
+in the default `summary.mblm()` function, or on on Kendall's Tau.  We emphasize 
+Kendall's Tau which is conceptually  closely related to the Thiel-Sen estimator.
+It effectively tests for a monotonic relationship (correlation between
+orderings) between two series.
 
 Some comments: This analysis ignores seasonal patterns and many possible
 covariates and confounding variables.  It also ignores the fact that
 we have right censored data, which is one more reason to prefer Kendall's Tau 
-to the linear model.
+(whihch is moderately resistant) to the linear model (which is not).
 
 ## Select Lakes With Sufficient Data
 We want to select only those lakes with a "reasonable" amount of data for
 analyzing trends, both short-term and long-term.
 
-We could soften these constraints using mixed models, but that appears both statistically unwise and potentially difficult to explain to our audience.
+We could soften these constraints using mixed models, but that appears both 
+statistically unwise and potentially difficult to explain to our audience.
 
 ### Long Term
 ```{r}
@@ -317,8 +324,12 @@ st_results <- recent_data %>%
 ## Results
 ### Long Term
 We calculate lake by lake linear model slopes and Theil-Sen slopes and P Values.
-We could also run these models using the nested data frames approach used
-for looking at metals in out Toxics data, but this "for loop" approach works
+We could also run these models using the nested data frames approach used in
+several other analyses used for SoCB (e.g., for looking at metals in CBEP Toxics 
+data).  
+
+We use this, significnatly slower, approach because we began with code used in 
+preparing the  2010 State of the Bay report.  This "for loop" approach works 
 (although inefficiently).
 
 ```{r}
@@ -330,9 +341,11 @@ TSSlopes   <- vector(mode = "numeric", length = 0)
 TSPValues  <- vector(mode = "numeric", length = 0)
 TSKPValues <- vector(mode = "numeric", length = 0)
 
-# This code is inefficient, since it copies vectors repeatedly on copy.
-# but this code works no matter how many la
- for (MIDAS in TrendLakesMIDAS) {
+# This code is inefficient, since it copies vectors repeatedly with each
+# "append(), but it works and does not require us to know the number of 
+# lakes
+ 
+for (MIDAS in TrendLakesMIDAS) {
    #print(MIDAS)
 
    thisdata <- secchi_data[secchi_data$MIDAS == MIDAS,]
@@ -393,7 +406,7 @@ rm(more, Slopes, PValues, TSSlopes, TSPValues, TSKPValues)
 ####  Extracting Results
 We filter out near-zero slopes (< 0.005m per year, or ~ 5 cm per decade) as
 meaningless.  We would not normally do that, but the Thiel-Sen analysis produces
-couple of lakes with slopes exactly equal to zero, which nevertheless have
+a couple of lakes with slopes exactly equal to zero, which nevertheless have
 statistically significant trends by Kendall's tau.  This reflects the slightly 
 different meanings of the different statistical tests involved.
 
@@ -425,19 +438,23 @@ There is a high correlation between the two slope estimators, as one might expec
 ```{r}
 cor(lt_results$Slope, lt_results$TSSlope)
 ```
-```{r}
+```{r fig.width = 6}
 plt <-  ggplot(lt_results, aes(Slope, TSSlope))  +
   geom_hline(yintercept = 0, lty = 3) +
   geom_vline(xintercept = 0, lty = 3) +
-  geom_abline(intercept = 0, slope = 1, lty = 3) +
+  geom_abline(intercept = 0, slope = 1, lty = 3, size = 1) +
   #geom_point(aes(color = Median), size = 5, alpha = 0.5) +
   geom_text(aes(label = MIDAS,  color = TS_category), size = 3) + 
 
-  geom_smooth(method = 'lm')
+  geom_smooth(method = 'lm') +
+  
+  coord_fixed() 
+
 plt
 ```
 So results are similar either way.  The TS Slope tends to be slightly lower
-than the linear model slope, especially for higher values of the slope, but the regression is not significantly different from a 1:1 line.  The two lakes,
+than the linear model slope, especially for higher values of the slope, but the 
+regression is not significantly different from a 1:1 line.  Two lakes,
 `MIDAS == 3420` and `MIDAS = 3448` show statistically significant improving
 trends by linear model, but not by Theil-Sen estimators.
 
@@ -532,7 +549,7 @@ st_results <- st_results %>%
 ```
 
 ### Comparison of Linear and Thiel-Sen Estimator Slopes
-There is only moderate correlation between the two slope estimators.
+There is again a close correlation between the two slope estimators.
 ```{r}
 cor(st_results$Slope, st_results$TSSlope)
 ```
@@ -628,7 +645,7 @@ So if there is a relationship, it's weak and predominately due to two lakes, so
 we won't take it too seriously.
 
 # Trendlines for All Lakes
-```{r fig.width = 3.5, fig.height = 5}
+```{r trendlines_all_lakes, fig.width = 3.5, fig.height = 5}
 secchi_data %>%
 filter(MIDAS %in% RecentLakesMIDAS) %>%
   ggplot(aes(Year, Secchi_Depth)) +
