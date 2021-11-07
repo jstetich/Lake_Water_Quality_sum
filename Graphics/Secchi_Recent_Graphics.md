@@ -38,31 +38,21 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 ``` r
 library(tidyverse)
-```
-
-    ## Warning: package 'tidyverse' was built under R version 4.0.5
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.3     v purrr   0.3.4
-    ## v tibble  3.1.2     v dplyr   1.0.6
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   1.4.0     v forcats 0.5.1
-
-    ## Warning: package 'tidyr' was built under R version 4.0.5
-
-    ## Warning: package 'dplyr' was built under R version 4.0.5
-
-    ## Warning: package 'forcats' was built under R version 4.0.5
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
-#library(readxl)
-#library(readr)
-
+#> Warning: package 'tidyverse' was built under R version 4.0.5
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.4     v dplyr   1.0.7
+#> v tidyr   1.1.3     v stringr 1.4.0
+#> v readr   2.0.1     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'tibble' was built under R version 4.0.5
+#> Warning: package 'tidyr' was built under R version 4.0.5
+#> Warning: package 'readr' was built under R version 4.0.5
+#> Warning: package 'dplyr' was built under R version 4.0.5
+#> Warning: package 'forcats' was built under R version 4.0.5
+#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
 library(CBEPgraphics)
 load_cbep_fonts()
 theme_set(theme_cbep())
@@ -78,7 +68,7 @@ NAs for the Secchi Depth.
 ## Folder References
 
 ``` r
-sibfldnm <- 'Derived_Data'
+sibfldnm <- 'Data'
 parent <- dirname(getwd())
 sibling <- file.path(parent,sibfldnm)
 fn <- 'Secchi.csv'
@@ -91,34 +81,16 @@ dir.create(file.path(getwd(), 'figures'), showWarnings = FALSE)
 
 ``` r
 secchi_data <- read_csv(file.path(sibling, fn))
+#> Rows: 18039 Columns: 12
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr  (6): Lake, Town, Time, Secchi_On_Bottom, Scope, Cloud_Cover
+#> dbl  (5): MIDAS, Station, Secchi_Depth, Wind_Level, Wind_Direction
+#> dttm (1): Date
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   MIDAS = col_double(),
-    ##   Lake = col_character(),
-    ##   Town = col_character(),
-    ##   Station = col_double(),
-    ##   Date = col_datetime(format = ""),
-    ##   Time = col_character(),
-    ##   Secchi_Depth = col_double(),
-    ##   Secchi_On_Bottom = col_character(),
-    ##   Scope = col_double(),
-    ##   Wind_Level = col_double(),
-    ##   Wind_Direction = col_double(),
-    ##   Cloud_Cover = col_character()
-    ## )
-
-    ## Warning: 9 parsing failures.
-    ##  row   col expected actual                                                                                                                              file
-    ## 1598 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1599 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1600 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1601 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## 1602 Scope a double      N 'C:/Users/curtis.bohlen/Documents/State of the Bay 2020/Data/A5. Inland Water Quality/Lake_Water_Quality/Derived_Data/Secchi.csv'
-    ## .... ..... ........ ...... .................................................................................................................................
-    ## See problems(...) for more details.
 
 Eight of nine parsing errors are for Scope == “N”, Songo pond, (MIDAS =
 3262), for every observation in 2011. We decided that “N” here probably
@@ -189,20 +161,16 @@ site that are inconsistent with other Sebago Lake data.
 ``` r
 fn <- 'Secchi_Sebago.csv'
 secchi_sebago_data <- read_csv(file.path(sibling, fn))
+#> Rows: 1002 Columns: 8
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr  (3): Lake, Town, StationName
+#> dbl  (4): MIDAS, Year, Secchi_Depth, Station
+#> dttm (1): Date
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   MIDAS = col_double(),
-    ##   Lake = col_character(),
-    ##   Town = col_character(),
-    ##   StationName = col_character(),
-    ##   Date = col_datetime(format = ""),
-    ##   Year = col_double(),
-    ##   Secchi_Depth = col_double(),
-    ##   Station = col_double()
-    ## )
 
 ``` r
 secchi_data <- secchi_data %>%
@@ -230,28 +198,14 @@ least some Secchi data.
 ``` r
 fn <- 'Lake_Morphometry_Metric.csv'
 morpho.data <- read_csv(file.path(sibling, fn))
-```
-
-    ## 
-    ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   .default = col_double(),
-    ##   Lake = col_character(),
-    ##   Towns = col_character(),
-    ##   Trop_Cat = col_character(),
-    ##   Dam = col_character(),
-    ##   Major_Drainage = col_character(),
-    ##   Sub_Drainage = col_character(),
-    ##   HUC10_Name = col_character(),
-    ##   USGS_Quad24 = col_character(),
-    ##   County = col_character(),
-    ##   WQ_Statement = col_character(),
-    ##   Invasives = col_character(),
-    ##   Fishery = col_character()
-    ## )
-    ## i Use `spec()` for the full column specifications.
-
-``` r
+#> Rows: 6044 Columns: 27
+#> -- Column specification --------------------------------------------------------
+#> Delimiter: ","
+#> chr (12): Lake, Towns, Trop_Cat, Dam, Major_Drainage, Sub_Drainage, HUC10_Na...
+#> dbl (15): MIDAS, Flushes_p_yr, HUC10_Code, UTM_X, UTM_Y, Latitude, Longitude...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #rm(fn,parent,sibfldnm,sibling)
 ```
 
@@ -265,11 +219,10 @@ names only have to be changed in one location,
 
 ``` r
 secchi_data$Lake[1:5]
+#> [1] "Ingalls (Foster's) Pond" "Ingalls (Foster's) Pond"
+#> [3] "Ingalls (Foster's) Pond" "Ingalls (Foster's) Pond"
+#> [5] "Ingalls (Foster's) Pond"
 ```
-
-    ## [1] "Ingalls (Foster's) Pond" "Ingalls (Foster's) Pond"
-    ## [3] "Ingalls (Foster's) Pond" "Ingalls (Foster's) Pond"
-    ## [5] "Ingalls (Foster's) Pond"
 
 ``` r
 secchi_data <- secchi_data %>%
@@ -302,7 +255,7 @@ secchi_data %>%
   ggtitle('Recent Secchi Depth Data')
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/data_by_year_1-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/data_by_year_1-1.png" style="display: block; margin: auto;" />
 
 ``` r
 secchi_data %>%
@@ -324,7 +277,7 @@ secchi_data %>%
   ggtitle('Recent Secchi Depth Data')
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/data_by_year_2-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/data_by_year_2-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ggsave('figures/current_secchi_data_availability.pdf', device = cairo_pdf, width = 7, height = 8)
@@ -435,7 +388,7 @@ plt <- secchi_data %>%
 plt
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/Secchi_bar_chart-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/Secchi_bar_chart-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ggsave('figures/current_secchi_bar.pdf', device = cairo_pdf,
@@ -464,7 +417,7 @@ plt <- secchi_data %>%
 plt
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/secchi_violin_plot-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/secchi_violin_plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ggsave('figures/current_secchi_violin.pdf', device = cairo_pdf,
@@ -489,52 +442,31 @@ rename(Easting = UTM_X,
        Northing = UTM_Y)
 
 cat('Pearson\n')
-```
-
-    ## Pearson
-
-``` r
+#> Pearson
 cor(tmp$Median, tmp[,2:12], use = 'pairwise')
-```
-
-    ##      Flushes_p_yr  HUC10_Code   Easting   Northing   Latitude Longitude
-    ## [1,]   -0.3157909 -0.08511318 0.2316798 -0.3989279 -0.3645313 0.2289313
-    ##      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
-    ## [1,] 0.3884424 0.4063973 0.6642717 0.5846967 0.3668176
-
-``` r
+#>      Flushes_p_yr  HUC10_Code   Easting   Northing   Latitude Longitude
+#> [1,]   -0.3157909 -0.08511318 0.2316798 -0.3989279 -0.3645313 0.2289313
+#>      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
+#> [1,] 0.3884424 0.4063973 0.6642717 0.5846967 0.3668176
 cat('\n\nSpearman\n')
-```
-
-    ## 
-    ## 
-    ## Spearman
-
-``` r
+#> 
+#> 
+#> Spearman
 cor(tmp$Median, tmp[,2:12], use = 'pairwise', method='spearman')
-```
-
-    ##      Flushes_p_yr HUC10_Code   Easting   Northing   Latitude Longitude
-    ## [1,]   -0.6913024 -0.1108531 0.2039002 -0.2835635 -0.2681525 0.1973801
-    ##      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
-    ## [1,]  0.492501 0.5110584 0.7075043 0.6218932 0.5769998
-
-``` r
+#>      Flushes_p_yr HUC10_Code   Easting   Northing   Latitude Longitude
+#> [1,]   -0.6913024 -0.1108531 0.2039002 -0.2835635 -0.2681525 0.1973801
+#>      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
+#> [1,]  0.492501 0.5110584 0.7075043 0.6218932 0.5769998
 cat('\n\nKendall\n')
-```
-
-    ## 
-    ## 
-    ## Kendall
-
-``` r
+#> 
+#> 
+#> Kendall
 cor(tmp$Median, tmp[,2:12], use = 'pairwise', method='kendall')
+#>      Flushes_p_yr HUC10_Code   Easting   Northing   Latitude Longitude
+#> [1,]   -0.5486471 -0.1015026 0.1307288 -0.1637867 -0.1607814  0.121713
+#>      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
+#> [1,] 0.3566592 0.3788706 0.5586134 0.4876175 0.4146149
 ```
-
-    ##      Flushes_p_yr HUC10_Code   Easting   Northing   Latitude Longitude
-    ## [1,]   -0.5486471 -0.1015026 0.1307288 -0.1637867 -0.1607814  0.121713
-    ##      Area_sq_m  Perim_km  D_Mean_m   D_Max_m Volume_m3
-    ## [1,] 0.3566592 0.3788706 0.5586134 0.4876175 0.4146149
 
 That shows:
 
@@ -566,15 +498,12 @@ plt <- ggplot(tmp3, aes(Value, Secchi)) +
     scale_x_log10() +
     facet_wrap(~Type, nrow=2, scales = "free_x")
 plt
+#> `geom_smooth()` using formula 'y ~ x'
+#> Warning: Removed 3 rows containing non-finite values (stat_smooth).
+#> Warning: Removed 3 rows containing missing values (geom_point).
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 3 rows containing missing values (geom_point).
-
-![](Secchi_Recent_Graphics_files/figure-gfm/Secchi_and_morphometrics_graphic-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/Secchi_and_morphometrics_graphic-1.png" style="display: block; margin: auto;" />
 
 ``` r
   rm(tmp3)
@@ -590,47 +519,42 @@ pretty good, with the two measures of depth the best fit.
 ``` r
 the_lm <- lm(Secchi~ DAvg, data = tmp2)
 summary(the_lm)
-```
-
-    ## 
-    ## Call:
-    ## lm(formula = Secchi ~ DAvg, data = tmp2)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -2.23776 -0.82555  0.07017  0.72814  3.02926 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  4.68627    0.32827  14.276 6.37e-16 ***
-    ## DAvg         0.20638    0.03983   5.182 9.98e-06 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 1.21 on 34 degrees of freedom
-    ##   (1 observation deleted due to missingness)
-    ## Multiple R-squared:  0.4413, Adjusted R-squared:  0.4248 
-    ## F-statistic: 26.85 on 1 and 34 DF,  p-value: 9.979e-06
-
-``` r
+#> 
+#> Call:
+#> lm(formula = Secchi ~ DAvg, data = tmp2)
+#> 
+#> Residuals:
+#>      Min       1Q   Median       3Q      Max 
+#> -2.23776 -0.82555  0.07017  0.72814  3.02926 
+#> 
+#> Coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)  4.68627    0.32827  14.276 6.37e-16 ***
+#> DAvg         0.20638    0.03983   5.182 9.98e-06 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 1.21 on 34 degrees of freedom
+#>   (1 observation deleted due to missingness)
+#> Multiple R-squared:  0.4413, Adjusted R-squared:  0.4248 
+#> F-statistic: 26.85 on 1 and 34 DF,  p-value: 9.979e-06
 anova(the_lm)
+#> Analysis of Variance Table
+#> 
+#> Response: Secchi
+#>           Df Sum Sq Mean Sq F value    Pr(>F)    
+#> DAvg       1 39.324  39.324  26.851 9.979e-06 ***
+#> Residuals 34 49.794   1.465                      
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-    ## Analysis of Variance Table
-    ## 
-    ## Response: Secchi
-    ##           Df Sum Sq Mean Sq F value    Pr(>F)    
-    ## DAvg       1 39.324  39.324  26.851 9.979e-06 ***
-    ## Residuals 34 49.794   1.465                      
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 oldpar <- par(mfrow = c(2,2))
 plot(the_lm)
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/regression_analytics-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/regression_analytics-1.png" style="display: block; margin: auto;" />
 
 ``` r
 par(oldpar)
@@ -642,47 +566,42 @@ Distance. This is not an especially good model.
 ``` r
 the_log_lm <- lm(Secchi~ log(DAvg), data = tmp2)
 summary(the_log_lm)
-```
-
-    ## 
-    ## Call:
-    ## lm(formula = Secchi ~ log(DAvg), data = tmp2)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -1.91817 -0.54711 -0.05251  0.77292  2.41602 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)   2.3677     0.4917   4.816 2.98e-05 ***
-    ## log(DAvg)     2.1692     0.2754   7.877 3.58e-09 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.9633 on 34 degrees of freedom
-    ##   (1 observation deleted due to missingness)
-    ## Multiple R-squared:  0.646,  Adjusted R-squared:  0.6356 
-    ## F-statistic: 62.05 on 1 and 34 DF,  p-value: 3.585e-09
-
-``` r
+#> 
+#> Call:
+#> lm(formula = Secchi ~ log(DAvg), data = tmp2)
+#> 
+#> Residuals:
+#>      Min       1Q   Median       3Q      Max 
+#> -1.91817 -0.54711 -0.05251  0.77292  2.41602 
+#> 
+#> Coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)   2.3677     0.4917   4.816 2.98e-05 ***
+#> log(DAvg)     2.1692     0.2754   7.877 3.58e-09 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 0.9633 on 34 degrees of freedom
+#>   (1 observation deleted due to missingness)
+#> Multiple R-squared:  0.646,  Adjusted R-squared:  0.6356 
+#> F-statistic: 62.05 on 1 and 34 DF,  p-value: 3.585e-09
 anova(the_log_lm)
+#> Analysis of Variance Table
+#> 
+#> Response: Secchi
+#>           Df Sum Sq Mean Sq F value    Pr(>F)    
+#> log(DAvg)  1 57.570  57.570  62.046 3.585e-09 ***
+#> Residuals 34 31.547   0.928                      
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-    ## Analysis of Variance Table
-    ## 
-    ## Response: Secchi
-    ##           Df Sum Sq Mean Sq F value    Pr(>F)    
-    ## log(DAvg)  1 57.570  57.570  62.046 3.585e-09 ***
-    ## Residuals 34 31.547   0.928                      
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 oldpar <- par(mfrow = c(2,2))
 plot(the_log_lm)
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/regression_analytics_2-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/regression_analytics_2-1.png" style="display: block; margin: auto;" />
 
 ``` r
 par(oldpar)
@@ -695,47 +614,42 @@ The model fits the smaller lakes substantially better.
 ``` r
 weighted_log_lm <- lm(Secchi~ log(DAvg), weights = sqrt(Samples), data = tmp2)
 summary(weighted_log_lm)
-```
-
-    ## 
-    ## Call:
-    ## lm(formula = Secchi ~ log(DAvg), data = tmp2, weights = sqrt(Samples))
-    ## 
-    ## Weighted Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -6.5246 -1.5413  0.0923  2.2726  9.0078 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)   2.7643     0.5808   4.760 3.51e-05 ***
-    ## log(DAvg)     1.9256     0.3062   6.288 3.64e-07 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 3.223 on 34 degrees of freedom
-    ##   (1 observation deleted due to missingness)
-    ## Multiple R-squared:  0.5377, Adjusted R-squared:  0.5241 
-    ## F-statistic: 39.54 on 1 and 34 DF,  p-value: 3.645e-07
-
-``` r
+#> 
+#> Call:
+#> lm(formula = Secchi ~ log(DAvg), data = tmp2, weights = sqrt(Samples))
+#> 
+#> Weighted Residuals:
+#>     Min      1Q  Median      3Q     Max 
+#> -6.5246 -1.5413  0.0923  2.2726  9.0078 
+#> 
+#> Coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)   2.7643     0.5808   4.760 3.51e-05 ***
+#> log(DAvg)     1.9256     0.3062   6.288 3.64e-07 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 3.223 on 34 degrees of freedom
+#>   (1 observation deleted due to missingness)
+#> Multiple R-squared:  0.5377, Adjusted R-squared:  0.5241 
+#> F-statistic: 39.54 on 1 and 34 DF,  p-value: 3.645e-07
 anova(weighted_log_lm)
+#> Analysis of Variance Table
+#> 
+#> Response: Secchi
+#>           Df Sum Sq Mean Sq F value    Pr(>F)    
+#> log(DAvg)  1 410.75  410.75  39.544 3.645e-07 ***
+#> Residuals 34 353.16   10.39                      
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-    ## Analysis of Variance Table
-    ## 
-    ## Response: Secchi
-    ##           Df Sum Sq Mean Sq F value    Pr(>F)    
-    ## log(DAvg)  1 410.75  410.75  39.544 3.645e-07 ***
-    ## Residuals 34 353.16   10.39                      
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ``` r
 oldpar <- par(mfrow = c(2,2))
 plot(weighted_log_lm)
 ```
 
-![](Secchi_Recent_Graphics_files/figure-gfm/regression_analytics_3-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/regression_analytics_3-1.png" style="display: block; margin: auto;" />
 
 ``` r
 par(oldpar)
@@ -769,11 +683,10 @@ ggplot(tmp, aes(D_Mean_m, Median)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   scale_y_continuous(limits=c(0,10), breaks = c(0,5,10)) +
   scale_x_log10()
+#> Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-    ## Warning: Removed 1 rows containing missing values (geom_point).
-
-![](Secchi_Recent_Graphics_files/figure-gfm/compare_log_regressions_graphic-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/compare_log_regressions_graphic-1.png" style="display: block; margin: auto;" />
 
 ``` r
 rm(df)
@@ -800,26 +713,21 @@ plt <- ggplot(tmp, aes(D_Mean_m, Median)) +
   scale_y_continuous(limits=c(0,10), breaks = c(0,5,10)) +
   scale_x_log10()
 plt
+#> `geom_smooth()` using formula 'y ~ x'
+#> Warning: Removed 1 rows containing non-finite values (stat_smooth).
+#> Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-    ## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 1 rows containing missing values (geom_point).
-
-![](Secchi_Recent_Graphics_files/figure-gfm/secchi_depth_graphic-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/secchi_depth_graphic-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ggsave('figures/current_secchi_by_depth.pdf', device = cairo_pdf,
 width = 5, height = 3)
+#> `geom_smooth()` using formula 'y ~ x'
+#> Warning: Removed 1 rows containing non-finite values (stat_smooth).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
 ```
-
-    ## `geom_smooth()` using formula 'y ~ x'
-
-    ## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 1 rows containing missing values (geom_point).
 
 ## Secchi by Location (and Depth)
 
@@ -836,8 +744,7 @@ plt <- tmp %>%
   theme(axis.text.x = element_text(angle = 25))
   
 plt
+#> Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-    ## Warning: Removed 1 rows containing missing values (geom_point).
-
-![](Secchi_Recent_Graphics_files/figure-gfm/secchi_by_location-1.png)<!-- -->
+<img src="Secchi_Recent_Graphics_files/figure-gfm/secchi_by_location-1.png" style="display: block; margin: auto;" />

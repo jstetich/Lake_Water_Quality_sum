@@ -5,19 +5,23 @@ date: "11/29/2020"
 output:
   github_document:
     toc: true
-    fig_width: 7
-    fig_height: 5
+    fig_width: 5
+    fig_height: 4
 ---
 
 <img
   src="https://www.cascobayestuary.org/wp-content/uploads/2014/04/logo_sm.jpg"
   style="position:absolute;top:10px;right:50px;" />
 
+```{r setup, , include=FALSE}
+knitr::opts_chunk$set(fig.align = 'center',
+                      fig.width = 5, fig.height = 4,
+                      collapse = TRUE, comment = "#>")
+```
+
 # Load Libraries
 ```{r}
 library(tidyverse)
-#library(readxl)
-#library(readr)
 
 library(CBEPgraphics)
 load_cbep_fonts()
@@ -32,7 +36,7 @@ included in these data but has no actual data -- only NAs for the Secchi Depth.
 
 ## Folder References
 ```{r}
-sibfldnm <- 'Derived_Data'
+sibfldnm <- 'Data'
 parent <- dirname(getwd())
 sibling <- file.path(parent,sibfldnm)
 fn <- 'Secchi.csv'
