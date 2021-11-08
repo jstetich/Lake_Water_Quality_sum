@@ -34,6 +34,10 @@ water quality parameters, including:
 *  Trophic State Index (TSI) calculated several different ways.  
 Measures of variability and sample size are not provided.
 
+We ultimately worked only with the Secchi Depth data, as that data is the most
+widely available, and offers the potential for the most long-term data sets,
+facilitating trend analysis.
+
 # MIDAS Numbers
 Water quality data are linked to "MIDAS" numbers, which provide unique
 identifiers for Maine lakes and ponds. On-line metadata describes the MIDAS

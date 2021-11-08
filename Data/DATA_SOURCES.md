@@ -29,7 +29,10 @@ as part of their "Knowledge Base".
 Because the actual data is buried several layers deep on these web sites, we
 created a Python 3 script, `ExtractLakeWQData.py` to access and download the
 state-wide lake water quality data. URLs and many other details are hard
-coded in the script. 
+coded in the script. That script is not included here, but is available
+in our [Lake_Water_Quality](https://github.com/ccb60/Lake_Water_Quality)
+GitHUb repository.  That script worked at end of 2020, but we have not checked
+to see if the data is still available sincee then.
 
 Available raw water quality data includes:
 1.  Chlorophyll A
@@ -53,8 +56,7 @@ Measures of variability are not provided.  Sample sizes are not clear (number of
 Secchi Depths are not fully addressed.
 
 ## Lake Morphometry
-Data on morphometry of many Maine lakes and ponds was accessed here:
-http://www.gulfofmaine.org/kb/files/9680/MaineLakes_Geography_Morphometry.xls
+Data on morphometry of many Maine lakes and ponds was accessed [here](http://www.gulfofmaine.org/kb/files/9680/MaineLakes_Geography_Morphometry.xls).
 
 # Sebago Lake Supplementary Data
 In data review, we realized the Sebago Lake data from the on-line repository
@@ -82,9 +84,9 @@ an aberration from the statistical software export.  We only report one decimal
 place.
 
 ## Sebago Lake Sampling Locations
-We located a scanned map of sebago lake sampling locations on the
+We located a scanned map of historic sebago lake sampling locations on the
 [Lakes of Maine website](https://www.lakesofmaine.org/lake-monitoring.html?m=5786)
-It is saved as"Station map for Sebago Lake.jpg"
+It is saved as "Station map for Sebago Lake.jpg"
 
 We requested geographic information on PWD (professional) sample locations from
 PWD staff, on December 12, 2020, and received the file 'Historical Lake Profile
