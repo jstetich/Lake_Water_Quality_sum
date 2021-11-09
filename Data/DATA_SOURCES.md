@@ -31,8 +31,10 @@ created a Python 3 script, `ExtractLakeWQData.py` to access and download the
 state-wide lake water quality data. URLs and many other details are hard
 coded in the script. That script is not included here, but is available
 in our [Lake_Water_Quality](https://github.com/ccb60/Lake_Water_Quality)
-GitHUb repository.  That script worked at end of 2020, but we have not checked
-to see if the data is still available sincee then.
+GitHUb repository.  That script worked as of the end of 2020. 
+
+Data available from those sources today (2021) appear to include data only 
+through 2018.  Data does not appear to have been updated since 2019.
 
 Available raw water quality data includes:
 1.  Chlorophyll A
@@ -64,9 +66,9 @@ was incomplete, with little data included in the DEP data from Sebago Lake
 since 2010.
 
 We requested supplementary data from Portland Water District, which manages
-long-term Sebago Lake MOnitoting, and recieved the file
-'Sebago export 2_24_2020.xlsx'.  PWD staff infomred us that they share their
-data with DEP electronically, so it may not get incorporated
+long-term Sebago Lake MOnitoring, and received the file
+'Sebago export 2_24_2020.xlsx'.  PWD staff informed us that they share their
+data with DEP electronically, BUT it apparently does not get incorporated
 into the on-line data, which is gathered principally through volunteer lake
 associations and the VLMP.
 
