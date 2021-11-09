@@ -50,3 +50,11 @@ numbers as follows:
 Geospatial data for Maine Lakes and Ponds in the Casco Bay watershed 
 (including MIDAS numbers) are available in the
 [Maine_lakes_MIDAS](https://github.com/ccb60/Maine_Lakes_MIDAS) repository.
+
+# Fact Sheet on Maine Lake Monitoring
+The fact sheet on Maine lakes monitoring reports in
+'Explanation of Individual Lake Water Quality Report.pdf' offers a convenient 
+summary of common Maine practice and terminology.  It was downloaded from
+the Lakes of Maine website
+[here](https://www.lakesofmaine.org/data/Explanation of Individual Lake Water Quality Report.pdf).
+
