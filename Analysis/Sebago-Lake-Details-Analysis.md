@@ -27,7 +27,7 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 Sebago lake is our region’s largest lake, and one of the most important.
 it is a crucial recreational resource for the region, and also provides
-high qUality drinking water for tens of thousands. Not coincidentally,
+high quality drinking water for tens of thousands. Not coincidentally,
 Sebago Lake also has one of the longest and richest records of water
 quality monitoring of any lake in the region. Here we leverage that rich
 data to look a bit more closely at how water clarity varies in space and
@@ -173,7 +173,7 @@ due to the large number of samples involved, but trends are not
 consistent across regions (or, presumably, across Stations).
 
 Note that Big Bay North, Big Bay West, and South Central have limited
-samples from the last 10 years or so, While Jordan Bay has little data
+samples from the last 10 years or so, while Jordan Bay has little data
 from before 1990. We may want to limit data at some point to simplify
 analyses.
 
