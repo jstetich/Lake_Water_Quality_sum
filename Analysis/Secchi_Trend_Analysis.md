@@ -101,7 +101,7 @@ secchi_data <- read_csv(file.path(sibling, fn))
 Eight of nine parsing errors are for Scope == “N”, Songo pond, (MIDAS =
 3262), for every observation in 2011. We decided that “N” here probably
 meant no scope was used, so Scope == 1 (or, Scope = “None”, after
-conversion to factor) is appropriate. We wil fix that after we add a
+conversion to factor) is appropriate. We will fix that after we add a
 “Year” value to the data.
 
 The ninth parsing error was for an observation from Woods Pond, in June
@@ -181,7 +181,7 @@ we have major gaps in the recent record. This probably reflects changes
 in how data has been reported to DEP.  
 2. The extreme low values in 2017 and 2018 correspond to the only two
 samples from a new station. Any recent trend is due to addition of this
-anomolous new source of data.
+anomalous new source of data.
 
 We correct these problems in two steps. First, we load in Portland Water
 District’s extensive Sebago Lake archive of Secchi data, then delete two
