@@ -14,7 +14,7 @@ duplicated lake polygons.
 
 ### Generating a CSV File
 For our analysis here, we needed to work with a list of MIDAS numbers for lakes 
-from the Casco Bay watershed.  We created a CCSV file by exporting data from
+from the Casco Bay watershed.  We created a CSV file by exporting data from
 the GIS file just described. We exported the attribute table of "CB_Lakes" (a
 shapefile) to "CB_Lakes.csv" (in the 'Supplementary Lake Data' folder). We then
 edited that file (by hand) to remove the FID column, and revised the column
@@ -29,7 +29,7 @@ Name            | Lake Name
 Town            | A single Town name, even for large lakes
 MIDAS Number    | The lakes' unique MIDAS number
 Elevation       | Elevation, in feet
-Notes           | If present, usally a comment about lake names
+Notes           | If present, usually a comment about lake names
 Name Change     | Additional; info on name changes
 ----------------|----------------------------------------------
 
@@ -142,7 +142,7 @@ Secchi on Bottom? | 	Indicates whether Secchi was on the lake bottom |  Yes (B o
 Scope	       | Viewing scope type |1=none; 2=plain; 3=slant glass; 4=slant glass with mask; 5=flat glass with mask. 
 Wind Level   | Wind velocity estimate (miles per hour)               | 
 Wind Direction | Wind direction estimate    | 1=N; 2=NE; 3=E; 4=SE; 5=S; 6=SW; 7=W; 8=NW 
-Cloud cover  |                              | B=clear; C=coudy/bright; O=heavy overcast. 
+Cloud cover  |                              | B=clear; C=cloudy/bright; O=heavy overcast. 
 -------------|------------------------------|-------------- 
 
 Note the annotation about whether the Secchi disk was on the bottom of the lake.
@@ -231,7 +231,7 @@ Organized by parameter, they are:
 
 _Alkalinity_:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"C" = Colorometric
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"C" = Colorimetric
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"M" = Methyl orange
 
@@ -251,7 +251,7 @@ _Alkalinity_:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"GRANPLOT"       = Not defined in the source metadata
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Bromcresol Green/Met"  = Not defined in the source metadata
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Bromocresol Green/Met"  = Not defined in the source metadata
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"L"              = Not defined in the source metadata
 
