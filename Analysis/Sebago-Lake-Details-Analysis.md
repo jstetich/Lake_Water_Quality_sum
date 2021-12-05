@@ -27,7 +27,7 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 Sebago lake is our region’s largest lake, and one of the most important.
 it is a crucial recreational resource for the region, and also provides
-high qUality drinking water for tens of thousands. Not coincidentally,
+high quality drinking water for tens of thousands. Not coincidentally,
 Sebago Lake also has one of the longest and richest records of water
 quality monitoring of any lake in the region. Here we leverage that rich
 data to look a bit more closely at how water clarity varies in space and
@@ -45,26 +45,27 @@ library(tidyverse)
 #> Warning: package 'tidyverse' was built under R version 4.0.5
 #> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 #> v ggplot2 3.3.5     v purrr   0.3.4
-#> v tibble  3.1.4     v dplyr   1.0.7
-#> v tidyr   1.1.3     v stringr 1.4.0
-#> v readr   2.0.1     v forcats 0.5.1
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
 #> Warning: package 'ggplot2' was built under R version 4.0.5
-#> Warning: package 'tibble' was built under R version 4.0.5
 #> Warning: package 'tidyr' was built under R version 4.0.5
-#> Warning: package 'readr' was built under R version 4.0.5
 #> Warning: package 'dplyr' was built under R version 4.0.5
 #> Warning: package 'forcats' was built under R version 4.0.5
 #> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
+
 library(mgcv)
+#> Warning: package 'mgcv' was built under R version 4.0.5
 #> Loading required package: nlme
 #> 
 #> Attaching package: 'nlme'
 #> The following object is masked from 'package:dplyr':
 #> 
 #>     collapse
-#> This is mgcv 1.8-36. For overview type 'help("mgcv-package")'.
+#> This is mgcv 1.8-38. For overview type 'help("mgcv-package")'.
+
 library(CBEPgraphics)
 load_cbep_fonts()
 theme_set(theme_cbep())
@@ -173,7 +174,7 @@ due to the large number of samples involved, but trends are not
 consistent across regions (or, presumably, across Stations).
 
 Note that Big Bay North, Big Bay West, and South Central have limited
-samples from the last 10 years or so, While Jordan Bay has little data
+samples from the last 10 years or so, while Jordan Bay has little data
 from before 1990. We may want to limit data at some point to simplify
 analyses.
 

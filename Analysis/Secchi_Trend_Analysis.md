@@ -45,13 +45,11 @@ library(tidyverse)
 #> Warning: package 'tidyverse' was built under R version 4.0.5
 #> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 #> v ggplot2 3.3.5     v purrr   0.3.4
-#> v tibble  3.1.4     v dplyr   1.0.7
-#> v tidyr   1.1.3     v stringr 1.4.0
-#> v readr   2.0.1     v forcats 0.5.1
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
 #> Warning: package 'ggplot2' was built under R version 4.0.5
-#> Warning: package 'tibble' was built under R version 4.0.5
 #> Warning: package 'tidyr' was built under R version 4.0.5
-#> Warning: package 'readr' was built under R version 4.0.5
 #> Warning: package 'dplyr' was built under R version 4.0.5
 #> Warning: package 'forcats' was built under R version 4.0.5
 #> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
@@ -101,7 +99,7 @@ secchi_data <- read_csv(file.path(sibling, fn))
 Eight of nine parsing errors are for Scope == “N”, Songo pond, (MIDAS =
 3262), for every observation in 2011. We decided that “N” here probably
 meant no scope was used, so Scope == 1 (or, Scope = “None”, after
-conversion to factor) is appropriate. We wil fix that after we add a
+conversion to factor) is appropriate. We will fix that after we add a
 “Year” value to the data.
 
 The ninth parsing error was for an observation from Woods Pond, in June
@@ -181,7 +179,7 @@ we have major gaps in the recent record. This probably reflects changes
 in how data has been reported to DEP.  
 2. The extreme low values in 2017 and 2018 correspond to the only two
 samples from a new station. Any recent trend is due to addition of this
-anomolous new source of data.
+anomalous new source of data.
 
 We correct these problems in two steps. First, we load in Portland Water
 District’s extensive Sebago Lake archive of Secchi data, then delete two
