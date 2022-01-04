@@ -1,3 +1,5 @@
+Insert CBEP logo
+
 # Lake_Water_Quality
 Access and analysis of data on water quality in Maine lakes and ponds,
 especially those in the Casco Bay watershed.
@@ -58,3 +60,4 @@ summary of common Maine practice and terminology.  It was downloaded from
 the Lakes of Maine website
 [here](https://www.lakesofmaine.org/data/Explanation of Individual Lake Water Quality Report.pdf).
 
+Should there also be Statement of Purpose, Data, and Analysis sections like the others? 
