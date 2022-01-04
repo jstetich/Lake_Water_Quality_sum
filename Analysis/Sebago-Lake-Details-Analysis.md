@@ -26,7 +26,7 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 # Introduction
 
 Sebago lake is our region’s largest lake, and one of the most important.
-it is a crucial recreational resource for the region, and also provides
+It is a crucial recreational resource for the region, and also provides
 high quality drinking water for tens of thousands. Not coincidentally,
 Sebago Lake also has one of the longest and richest records of water
 quality monitoring of any lake in the region. Here we leverage that rich
@@ -182,7 +182,7 @@ analyses.
 
 We are interested in looking at smoothed temporal trends, so we are
 probably looking at using a GAM model or a GAMM model if we want to
-explicitly model stations as random factors. hat feels unnecessary for a
+explicitly model stations as random factors. That feels unnecessary for a
 preliminary analysis.
 
 ``` r
