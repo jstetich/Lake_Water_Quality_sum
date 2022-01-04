@@ -45,14 +45,15 @@ Available raw water quality data includes:
 
 Summary tables(both annual, and including all records) provide averages for
 water quality parameters, including:  
-*  Secchi Depth,  
-*  Color,   
-*  Chlorophyll A,  
-*  pH,  
-*  Alkalinity,  
-*  Conductivity,  
-*  Total Phosphorus, and  
+*  Secchi Depth
+*  Color
+*  Chlorophyll A
+*  pH
+*  Alkalinity 
+*  Conductivity
+*  Total Phosphorus  
 *  Trophic State Index (TSI) calculated several different ways.  
+
 Measures of variability are not provided.  Sample sizes are not clear (number of
 "months" of data are indicated, not number of observations). Right Censored
 Secchi Depths are not fully addressed.
@@ -68,7 +69,7 @@ since 2010.
 We requested supplementary data from Portland Water District, which manages
 long-term Sebago Lake MOnitoring, and received the file
 'Sebago export 2_24_2020.xlsx'.  PWD staff informed us that they share their
-data with DEP electronically, BUT it apparently does not get incorporated
+data with DEP electronically, but it apparently does not get incorporated
 into the on-line data, which is gathered principally through volunteer lake
 associations and the VLMP.
 
@@ -76,7 +77,7 @@ Data was e-mailed to Curtis C. Bohlen from Nate Whalen, at Portland Water
 District, on December 7, 2020.  Data file name suggests data was complete as
 of 2/24/2020, and it includes data through 2019.
 
-In Separate e-mail (Dec 8, 2020) in response to some questions, Nate said:
+In a separate e-mail (Dec 8, 2020) in response to some questions, Nate said:
 
 > The UserVarEJ column in the Event tab is Secchi Data collected with a view
 scope with no mask.  There was a correction factor applied to account for this
