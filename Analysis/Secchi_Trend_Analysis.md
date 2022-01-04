@@ -65,8 +65,8 @@ theme_set(theme_cbep())
 
 # Load Data
 
-Here we read in the data, do a lot of renaming, and convert some to
-factors, and finally, add a Year term. Note the filter removing NAs is
+Here we read in the data, do a lot of renaming, convert some to
+factors, and add a Year term. Note the filter removing NAs is
 because one lake is included in these data but has no actual data – only
 NAs for the Secchi Depth.
 
@@ -125,9 +125,9 @@ Here we convert some values to factors, and add Year and month terms.
     Depth.
 
 -   Coding for the “Secchi\_on\_Bottom” flag is inconsistent, with four
-    possible codes: “Y”, “B”, “N”, and "“. We interpret the first two as
-    evidence that the Secchi Disk was on the bottom,”N" as evidence that
-    it was not, and "" as a missing value.
+    possible codes: “Y”, “B”, “N”, and "" “. We interpret the first two as
+    evidence that the Secchi Disk was on the bottom, ”N" as evidence that
+    it was not, and "Is this supposed to be an empty space?" as a missing value.
 
 ``` r
 secchi_data <- secchi_data %>%
@@ -280,7 +280,7 @@ medians for each lake, using ordinary least squares (3) Analysis of
 medians for each lake, using weighted least squares to account for
 changes in sample size (4) Multi-level linear models
 
-But for our purposes, the interest is on properties of individual
+But for our purposes, the interest is on properties of individual lakes.
 
 ## Basic Lake Info
 
@@ -316,7 +316,7 @@ slopes to show that the qualitative results of the analysis are largely
 insensitive to the details of the analysis used, but we will report
 results of the Theil-Sen analysis.
 
-Significance of the Thiel-Sel slopes is based either on the Wilcoxon
+Significance of the Thiel-Sen slopes is based either on the Wilcoxon
 Test used in the default `summary.mblm()` function, or on on Kendall’s
 Tau. We emphasize Kendall’s Tau which is conceptually closely related to
 the Thiel-Sen estimator. It effectively tests for a monotonic
@@ -415,7 +415,7 @@ Values. We could also run these models using the nested data frames
 approach used in several other analyses used for SoCB (e.g., for looking
 at metals in CBEP Toxics data).
 
-We use this, significnatly slower, approach because we began with code
+We use this significantly slower approach because we began with code
 used in preparing the 2010 State of the Bay report. This “for loop”
 approach works (although inefficiently).
 
