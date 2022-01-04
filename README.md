@@ -24,14 +24,15 @@ Available raw water quality data includes:
 
 Summary tables(both annual, and including all records) provide averages for
 water quality parameters, including:  
-*  Secchi Depth,  
-*  Color,   
-*  Chlorophyll A,  
-*  pH,  
-*  Alkalinity,  
-*  Conductivity,  
-*  Total Phosphorus, and  
+*  Secchi Depth
+*  Color
+*  Chlorophyll A  
+*  pH
+*  Alkalinity  
+*  Conductivity  
+*  Total Phosphorus  
 *  Trophic State Index (TSI) calculated several different ways.  
+
 Measures of variability and sample size are not provided.
 
 We ultimately worked only with the Secchi Depth data, as that data is the most
